@@ -138,6 +138,7 @@
     <ClInclude Include="..\..\Source\include\stream_buffer.h" />
     <ClInclude Include="..\..\Source\include\timers.h" />
     <ClInclude Include="..\..\Source\portable\MSVC-MingW\portmacro.h" />
+    <ClInclude Include="data_structures\vcu_common.h" />
     <ClInclude Include="FreeRTOSConfig.h" />
     <ClInclude Include="..\..\Source\include\FreeRTOS.h" />
     <ClInclude Include="..\..\Source\include\list.h" />
@@ -146,6 +147,9 @@
     <ClInclude Include="..\..\Source\include\queue.h" />
     <ClInclude Include="..\..\Source\include\semphr.h" />
     <ClInclude Include="..\..\Source\include\task.h" />
+    <ClInclude Include="hardware\launchpad_hw\board_hardware.h" />
+    <ClInclude Include="hardware\vcu_hw\board_hardware.h" />
+    <ClInclude Include="tasks\task_config.h" />
     <ClInclude Include="Trace_Recorder_Configuration\trcConfig.h" />
     <ClInclude Include="Trace_Recorder_Configuration\trcKernelPortConfig.h" />
     <ClInclude Include="Trace_Recorder_Configuration\trcKernelPortSnapshotConfig.h" />

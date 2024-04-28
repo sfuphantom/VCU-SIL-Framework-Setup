@@ -91,6 +91,12 @@
 #include "timers.h"
 #include "semphr.h"
 
+ #include "tasks\headers\task_throttle.h"
+ #include "tasks\headers\task_pedal_readings.h"
+//#include "tasks\headers\task_event_handler.h"
+//#include "tasks\headers\task_logger.h"
+//hello
+
 /* Priorities at which the tasks are created. */
 #define mainQUEUE_RECEIVE_TASK_PRIORITY		( tskIDLE_PRIORITY + 2 )
 #define	mainQUEUE_SEND_TASK_PRIORITY		( tskIDLE_PRIORITY + 1 )

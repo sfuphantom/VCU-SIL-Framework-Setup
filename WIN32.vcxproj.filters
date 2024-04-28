@@ -222,6 +222,18 @@
     <ClInclude Include="..\..\..\FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include\trcRecorder.h">
       <Filter>Demo App Source\FreeRTOS+Trace Recorder\include</Filter>
     </ClInclude>
+    <ClInclude Include="hardware\launchpad_hw\board_hardware.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hardware\vcu_hw\board_hardware.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data_structures\vcu_common.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\task_config.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
