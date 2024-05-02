@@ -9,11 +9,13 @@
 
 /* Phantom modules */
 #include "ansi_colors.h"
+//#include "halcogen_launchpad\include\os_mpu_wrappers.h"
 
 /* Phantom tasks */
 #include "task_event_handler.h"
 #include "task_throttle.h"
 #include "task_logger.h"
+#include "phantom_timer.h"
 
 static void UpdateStateMachine(void* data);
 static State VariousStates(State state, eCarEvents event);
@@ -52,7 +54,7 @@ void NotifyStateMachineFromTimer(TimerHandle_t timer)
 
 	static char buffer[64];
 	snprintf(buffer, 64, "(%s:%d): Expired after %dms", pcTimerGetTimerName(timer), event, xTimerGetPeriod(timer));
-	LogColor(YEL, buffer);
+	//LogColor(YEL, buffer);
 
 	HandleEvent(UpdateStateMachine, event);
 }

@@ -8,7 +8,7 @@
 #ifndef PHANTOM_TASKS_task_pedal_readings_H_
 #define PHANTOM_TASKS_task_pedal_readings_H_
 
-#include "data_structures/vcu_common.h"
+#include "vcu_common.h"
 
 #define HYSTERESIS 200U
 

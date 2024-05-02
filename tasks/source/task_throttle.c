@@ -12,19 +12,20 @@
 #include "math.h"           
 
 /* Halcogen drivers */
-#include "hal_stdtypes.h"
-#include "gio.h"
-#include "adc.h"
+//#include "hal_stdtypes.h"
+//#include "gio.h"
+//#include "adc.h"
 
 /* Phantom modules*/
-#include "board_hardware.h"
-#include "MCP48FV_DAC_SPI.h"
-#include "phantom_timer.h"
-#include "Phantom_sci.h"
+//#include "board_hardware.h"
+//#include "MCP48FV_DAC_SPI.h"
+//#include "Drivers\UART\phantom_timer.h"
+//#include "Drivers\UART\Phantom_sci.h"
 
 /* Phantom tasks */
 #include "task_pedal_readings.h"    
 #include "task_throttle.h"    
+#include <board_hardware.h>
 #include "state_machine.h"    
 #include "task_logger.h"      
 
@@ -78,11 +79,17 @@ TaskHandle_t ThrottleInit(void)
 		&taskHandle
 	);
 
-    faultTimers.APPS1Range = Phantom_createTimer("Apps1RangeCheck", 100, NO_RELOAD, EVENT_APPS1_RANGE_FAULT, NotifyStateMachineFromTimer);
-    faultTimers.APPS2Range = Phantom_createTimer("Apps2RangeCheck", 100, NO_RELOAD, EVENT_APPS2_RANGE_FAULT, NotifyStateMachineFromTimer);
-    faultTimers.BSERange = Phantom_createTimer("BseRangeCheck", 100, NO_RELOAD, EVENT_BSE_RANGE_FAULT, NotifyStateMachineFromTimer);
-    faultTimers.FPDiff = Phantom_createTimer("FpDiffCheck", 100, NO_RELOAD, EVENT_FP_DIFF_FAULT, NotifyStateMachineFromTimer);
-    faultTimers.RTDS = Phantom_createTimer("RTDSSwitch", 2000, NO_RELOAD, 0, NotifyStateMachineFromTimer); 
+    //faultTimers.APPS1Range = Phantom_createTimer("Apps1RangeCheck", 100, NO_RELOAD, EVENT_APPS1_RANGE_FAULT, NotifyStateMachineFromTimer);
+    //faultTimers.APPS2Range = Phantom_createTimer("Apps2RangeCheck", 100, NO_RELOAD, EVENT_APPS2_RANGE_FAULT, NotifyStateMachineFromTimer);
+    //faultTimers.BSERange = Phantom_createTimer("BseRangeCheck", 100, NO_RELOAD, EVENT_BSE_RANGE_FAULT, NotifyStateMachineFromTimer);
+    //faultTimers.FPDiff = Phantom_createTimer("FpDiffCheck", 100, NO_RELOAD, EVENT_FP_DIFF_FAULT, NotifyStateMachineFromTimer);
+    //faultTimers.RTDS = Phantom_createTimer("RTDSSwitch", 2000, NO_RELOAD, 0, NotifyStateMachineFromTimer); 
+
+    faultTimers.APPS1Range = Phantom_createTimer("Apps1RangeCheck", 100, 1, EVENT_APPS1_RANGE_FAULT, NotifyStateMachineFromTimer);
+    faultTimers.APPS2Range = Phantom_createTimer("Apps2RangeCheck", 100, 1, EVENT_APPS2_RANGE_FAULT, NotifyStateMachineFromTimer);
+    faultTimers.BSERange = Phantom_createTimer("BseRangeCheck", 100, 1, EVENT_BSE_RANGE_FAULT, NotifyStateMachineFromTimer);
+    faultTimers.FPDiff = Phantom_createTimer("FpDiffCheck", 100, 1, EVENT_FP_DIFF_FAULT, NotifyStateMachineFromTimer);
+    faultTimers.RTDS = Phantom_createTimer("RTDSSwitch", 2000, 1, 0, NotifyStateMachineFromTimer);
 
     MCP48FV_Init();
 
@@ -96,9 +103,9 @@ void SuspendThrottle(TaskHandle_t self)
     if (self == taskHandle)
     {
         MCP48FV_Set_Value(0); // send throttle value to DAC driver
-        LogColor(RED, "Turning off throttle");
+        LogColor(1, "Turning off throttle");
 
-		LogColor(RED, "Suspending throttle task.");
+		LogColor(1, "Suspending throttle task.");
         vTaskSuspend(self);
     }
     #else

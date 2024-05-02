@@ -8,7 +8,7 @@
 #ifndef INCLUDE_PHANTOM_SCI_H_
 #define INCLUDE_PHANTOM_SCI_H_
 
-#include <halcogen_vcu/include/sci.h>
+#include <sci.h>
 #include "vcu_common.h"
 
 #ifdef __cplusplus

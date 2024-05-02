@@ -163,6 +163,42 @@
     <ClCompile Include="..\Common\Minimal\TaskNotifyArray.c">
       <Filter>Demo App Source\Full_Demo\Common Demo Tasks</Filter>
     </ClCompile>
+    <ClCompile Include="tasks\source\task_throttle.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Drivers\STATE_MACHINE\state_machine.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="data_structures\vcu_common.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="data_structures\vcu_data.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Drivers\DAC_SPI\MCP48FV_DAC_SPI.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Drivers\EEPROM\eeprom_driver.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Drivers\RGB_LED\RGB_LED.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Drivers\RTD_Buzzer\RTD_Buzzer.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Drivers\UART\Phantom_sci.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\source\task_eeprom.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\source\task_pedal_readings.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tasks\source\task_watchdog.c">
+      <Filter>Demo App Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FreeRTOSConfig.h">
@@ -232,6 +268,804 @@
       <Filter>Configuration Files</Filter>
     </ClInclude>
     <ClInclude Include="tasks\task_config.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drivers\UART\Phantom_sci.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drivers\STATE_MACHINE\state_machine.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_task.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_timer.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_queue.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\headers\task_throttle.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\headers\task_pedal_readings.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_het.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\rtos-common\ansi_colors.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\rtos-common\phantom_timer.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\rtos-common\task_event_handler.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\rtos-common\task_logger.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="data_structures\vcu_data.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drivers\DAC_SPI\MCP48FV_DAC_SPI.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drivers\EEPROM\eeprom_driver.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drivers\RGB_LED\RGB_LED.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drivers\RTD_Buzzer\RTD_Buzzer.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\adc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\can.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\crc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\dcc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\Device_header.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\Device_TMS570LS12.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\Device_types.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\ecap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\eqep.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\errata_SSWF021_45.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\errata_SSWF021_45_defs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\esm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\etpwm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\fee_interface.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\FreeRTOS.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\FreeRTOSConfig.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\gio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\hal_stdtypes.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\het.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\htu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\i2c.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\lin.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\MemMap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\mibspi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_croutine.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_event_groups.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_list.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_mpu_wrappers.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_portable.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_portmacro.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_projdefs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_queue.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_semphr.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_StackMacros.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_task.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\os_timer.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\pinmux.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_adc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_can.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_crc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_dcc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_dma.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_ecap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_efc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_eqep.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_esm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_etpwm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_flash.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_gio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_het.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_htu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_i2c.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_lin.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_mibspi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_pbist.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_pcr.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_pinmux.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_pmm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_rti.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_sci.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_spi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_stc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_system.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_tcram.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\reg_vim.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\rti.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sci.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\spi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\std_nhet.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_common.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_core.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_dma.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_mpu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_pcr.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_pmm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_pmu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_selftest.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\sys_vim.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\system.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\ti_fee.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\ti_fee_cfg.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_launchpad\include\ti_fee_types.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\adc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\can.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\crc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\dcc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\Device_header.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\Device_TMS570LS12.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\Device_types.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\ecap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\emac.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\emif.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\eqep.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\errata_SSWF021_45.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\errata_SSWF021_45_defs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\esm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\etpwm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\fee_interface.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\FreeRTOS.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\FreeRTOSConfig.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\gio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\hal_stdtypes.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\het.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\htu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\hw_emac.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\hw_emac_ctrl.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\hw_mdio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\hw_reg_access.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\i2c.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\lin.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\mdio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\MemMap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\mibspi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_croutine.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_event_groups.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_list.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_mpu_wrappers.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_portable.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_portmacro.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_projdefs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_semphr.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\os_StackMacros.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\phy_dp83640.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\pinmux.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\pom.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_adc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_can.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_crc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_dcc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_dma.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_ecap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_efc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_emif.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_eqep.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_esm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_etpwm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_flash.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_gio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_htu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_i2c.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_lin.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_mibspi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_pbist.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_pcr.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_pinmux.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_pmm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_pom.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_rti.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_sci.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_spi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_stc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_system.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_tcram.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\reg_vim.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\rti.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sci.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\spi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\std_nhet.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_common.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_core.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_dma.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_mpu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_pcr.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_pmm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_pmu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_selftest.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\sys_vim.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\system.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\ti_fee.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\ti_fee_cfg.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="halcogen_vcu\include\ti_fee_types.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="support\execution_timer.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\headers\task_eeprom.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tasks\headers\task_watchdog.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\adc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\can.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\crc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\dcc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\Device_header.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\Device_TMS570LS12.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\Device_types.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\ecap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\emac.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\eqep.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\errata_SSWF021_45.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\errata_SSWF021_45_defs.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\esm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\etpwm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\fee_interface.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\gio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\hal_stdtypes.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\het.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\htu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\hw_emac.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\hw_emac_ctrl.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\hw_mdio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\hw_reg_access.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\i2c.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\lin.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\mdio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\MemMap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\mibspi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\phy_dp83640.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\pinmux.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_adc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_can.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_crc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_dcc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_dma.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_ecap.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_efc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_eqep.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_esm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_etpwm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_flash.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_gio.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_het.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_htu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_i2c.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_lin.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_mibspi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_pbist.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_pcr.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_pinmux.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_pmm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_rti.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_sci.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_spi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_stc.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_system.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_tcram.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\reg_vim.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\rti.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sci.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\spi.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\std_nhet.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_common.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_core.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_dma.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_mpu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_pcr.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_pmm.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_pmu.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_selftest.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\sys_vim.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\system.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\ti_fee.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\ti_fee_cfg.h">
+      <Filter>Configuration Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\ti_fee_types.h">
       <Filter>Configuration Files</Filter>
     </ClInclude>
   </ItemGroup>

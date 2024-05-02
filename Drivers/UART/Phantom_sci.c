@@ -1,8 +1,8 @@
 
 #include "Phantom_sci.h"
 
-#include <halcogen_vcu/include/sci.h>
-#include <halcogen_vcu/include/gio.h>
+#include <sci.h>
+#include <gio.h>
 #include "string.h"
 #include "stdarg.h"
 #include "stdio.h"

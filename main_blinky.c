@@ -93,8 +93,8 @@
 
  #include "tasks\headers\task_throttle.h"
  #include "tasks\headers\task_pedal_readings.h"
-//#include "tasks\headers\task_event_handler.h"
-//#include "tasks\headers\task_logger.h"
+// #include "tasks\headers\task_event_handler.h"
+// #include "tasks\headers\task_logger.h"
 //hello
 
 /* Priorities at which the tasks are created. */
@@ -140,6 +140,29 @@ static QueueHandle_t xQueue = NULL;
 static TimerHandle_t xTimer = NULL;
 
 /*-----------------------------------------------------------*/
+
+void phantomTasksInit()
+{
+    //SystemTasks_t t = {
+    //    .EventHandler = EventHandlerInit(),
+    //    .Logger = LoggerInit(),
+    //    .Throttle = ThrottleInit(),
+    //    .PedalReadings = PedalReadingsInit()
+    //};
+    SystemTasks_t t = {
+    .EventHandler =  NULL,
+    .Logger = NULL,
+    .Throttle = ThrottleInit(),
+    .PedalReadings = NULL,
+    };
+
+ /*   if (!all(4, t.EventHandler, t.Logger, t.Throttle, t.PedalReadings))
+    {
+        while (1) UARTprintln("Some tasks not initialized: %d, %d, %d, %d", t.EventHandler, t.Logger, t.Throttle, t.PedalReadings);
+    }*/
+
+    //StateMachineInit(t);
+}
 
 /*** SEE THE COMMENTS AT THE TOP OF THIS FILE ***/
 void main_blinky( void )

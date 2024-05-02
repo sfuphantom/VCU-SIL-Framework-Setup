@@ -3,13 +3,14 @@
 
 #include "FreeRTOS.h"
 #include "FreeRTOSConfig.h"
-//#include "os_queue.h"
-//#include "os_task.h"
-#include "tasks/task_config.h"
+#include "os_queue.h"
+#include "os_task.h"
+#include "os_timer.h"
+#include "task_config.h"
 #include <stdint.h>
 #include <stdbool.h>
 #include "stdarg.h"
-//#include "hal_stdtypes.h"
+#include "hal_stdtypes.h"
 
 typedef __int32 int32;
 typedef unsigned __int32 uint32;

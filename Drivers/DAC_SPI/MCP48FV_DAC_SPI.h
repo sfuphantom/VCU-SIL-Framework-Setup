@@ -8,7 +8,7 @@
 #ifndef INCLUDE_DAC_SPI_MCP48FV_DAC_SPI_H_
 #define INCLUDE_DAC_SPI_MCP48FV_DAC_SPI_H_
 
-#include <halcogen_vcu/include/mibspi.h>
+#include <mibspi.h>
 #include "stdbool.h"
 
 
