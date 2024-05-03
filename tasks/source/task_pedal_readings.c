@@ -10,14 +10,14 @@
 /* C standard libs */
 #include "stdlib.h"
 #include "string.h"
-#include "sci.h"
+//#include "sci.h"
 #include "stdio.h"
 #include "math.h"
 
 /* Halcogen drivers */
-#include "sys_common.h"
-#include "adc.h"
-#include "gio.h"
+//#include "sys_common.h"
+//#include "adc.h"
+//#include "gio.h"
 
 /* Phantom modules */
 #include "Phantom_sci.h"
@@ -97,7 +97,6 @@ static void vPedalReadingsTask(void* arg)
 	}
 }
 
-
 static pedal_reading_t ReadPedals()
 {
 
@@ -105,14 +104,20 @@ static pedal_reading_t ReadPedals()
 	// delay must occur here because sim mode has no delay (frequency determined by incoming serial data)
 	vTaskDelay(pdMS_TO_TICKS(20)); 
 
+    #ifndef SIMULATING 
+
 	// Get pedal readings from ADC
 	adcData_t FP_data[3];
 	adcStartConversion(adcREG1, adcGROUP1);
 	while (!adcIsConversionComplete(adcREG1, adcGROUP1)); // prefer another method of waiting, maybe an interrupt with TaskSuspend/Resume/YIELD?
 	adcGetData(adcREG1, adcGROUP1, FP_data);
 
+
+
 	// must map each value explicitly because compiler may not have the same mem packing rules for struct as arrays
 	return (pedal_reading_t) {FP_data[0].value, FP_data[1].value, FP_data[2].value};
+
+#endif
 
 	#else
 	return getSerialPedalData();
@@ -121,12 +126,18 @@ static pedal_reading_t ReadPedals()
 
 static void SetBrakeLight(uint8_t value)
 {
-	if (gioGetBit(BRAKE_LIGHT) != value)
-	{
-		char buffer[32];
-		sprintf(buffer, "Setting brakelight: %d", value);
-		Log(buffer);
 
-		gioSetBit(BRAKE_LIGHT, value);
-	}
+#ifndef SIMULATING
+
+    if (gioGetBit(BRAKE_LIGHT) != value)
+    {
+        char buffer[32];
+        sprintf(buffer, "Setting brakelight: %d", value);
+        Log(buffer);
+
+        gioSetBit(BRAKE_LIGHT, value);
+    }
+#endif // !1
+    return NULL;
+
 }
