@@ -8,9 +8,9 @@
 #ifndef PHANTOM_HARDWARE_VCU_HW_BOARD_HARDWARE_H_
 #define PHANTOM_HARDWARE_VCU_HW_BOARD_HARDWARE_H_
 
-
-#include "adc.h"
-#include "reg_het.h"
+//
+//#include "adc.h"
+//#include "reg_het.h"
 
 
 /*********   READY TO DRIVE GPIO   ****************/
