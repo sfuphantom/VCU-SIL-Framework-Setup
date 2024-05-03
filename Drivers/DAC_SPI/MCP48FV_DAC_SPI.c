@@ -1,7 +1,8 @@
 //DAC init
 #include "MCP48FV_DAC_SPI.h"
 #include "board_hardware.h"   // contains hardware defines for specific board used (i.e. VCU or launchpad)
-//#include "mibspi.h"
+#include "mibspi.h"
+#include "vcu_common.h"
 
 #define DAC_LOWEST_VOLTAGE 0
 #define DAC_HIGHEST_VOLTAGE 5
@@ -15,10 +16,16 @@
 #define DAC_READ_CMD 03 //0b11
 #define DAC_WRITE_CMD 00
 
+
 // init function, responsible for initializing MiBspi
 bool MCP48FV_Init(){
+#ifndef SIMULATING
+
     mibspiInit();
     MCP48FV_Set_Value(300);        //500 = 5.00V, 250 = 2.5V
+
+#endif // !SIMULATING
+
     return true;
 }
 
@@ -27,14 +34,19 @@ bool MCP48FV_Init(){
 */
 bool MCP48FV_Set_Value(uint16_t targetVoltage){
 
-   if(targetVoltage>496)
-   {
-       targetVoltage = 496;
-   }
-    uint32_t enableBitPrecent= ((targetVoltage+5)*1000)/(DAC_HIGHEST_VOLTAGE*100);
-    uint32_t dacRegister= (enableBitPrecent*0xFF)/1000;
+#ifndef SIMULATING
 
-   MCP48FV_Write(cmdCreator(DAC0_REGISTER_ADDRESS, DAC_WRITE_CMD,0,dacRegister));
+    if (targetVoltage > 496)
+    {
+        targetVoltage = 496;
+    }
+    uint32_t enableBitPrecent = ((targetVoltage + 5) * 1000) / (DAC_HIGHEST_VOLTAGE * 100);
+    uint32_t dacRegister = (enableBitPrecent * 0xFF) / 1000;
+
+    MCP48FV_Write(cmdCreator(DAC0_REGISTER_ADDRESS, DAC_WRITE_CMD, 0, dacRegister));
+
+
+#endif // !SIMULATING
 
     return true;
 }
@@ -53,11 +65,15 @@ bool MCP48FV_Write(uint32_t cmdString){
 //    uint8_t cmdSPI3= (cmdString>>16);
 
 //
-    uint16_t txbuffer[]={(uint8_t) (cmdString>>16),(uint8_t) (cmdString>>8),(uint8_t) (cmdString>>0)};
-    mibspiSetData(DAC_SPI_PORT,0,txbuffer);
-    mibspiTransfer(DAC_SPI_PORT,0);
-    while(!(mibspiIsTransferComplete(DAC_SPI_PORT,0))); // need a timeout
+
+#ifndef SIMULATING
+    uint16_t txbuffer[] = { (uint8_t)(cmdString >> 16),(uint8_t)(cmdString >> 8),(uint8_t)(cmdString >> 0) };
+    mibspiSetData(DAC_SPI_PORT, 0, txbuffer);
+    mibspiTransfer(DAC_SPI_PORT, 0);
+    while (!(mibspiIsTransferComplete(DAC_SPI_PORT, 0))); // need a timeout
     // start a timer, don't use a while loop forever
+#endif // !SIMULATING
+
 
     return true;
 
@@ -66,15 +82,27 @@ bool MCP48FV_Write(uint32_t cmdString){
 //return register data from specific register
 uint16_t readRegister (uint8_t registerAddress){
 
-    MCP48FV_Write(cmdCreator(registerAddress,DAC_READ_CMD,0,0));
-    return  MCP48FV_Read() % (1<<12);
+#ifndef SIMULATING
+
+    MCP48FV_Write(cmdCreator(registerAddress, DAC_READ_CMD, 0, 0));
+    return  MCP48FV_Read() % (1 << 12);
+#endif // !SIMULATING
+
+    return 0;
 }
 
 //receive data from MCP48FV
 uint16_t MCP48FV_Read(){
 
-    uint16_t rxBuffer[10]={0};
-    mibspiGetData(DAC_SPI_PORT,0,rxBuffer);
-    return (rxBuffer[2]<<8+rxBuffer[1]<<8+rxBuffer[0]);
+#ifndef SIMULATING
+
+    uint16_t rxBuffer[10] = { 0 };
+    mibspiGetData(DAC_SPI_PORT, 0, rxBuffer);
+    return (rxBuffer[2] << 8 + rxBuffer[1] << 8 + rxBuffer[0]);
+
+#endif // !SIMULATING
+
+    return 0;
+
 }
 
