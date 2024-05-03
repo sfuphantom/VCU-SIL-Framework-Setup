@@ -2,7 +2,7 @@
 #include "Phantom_sci.h"
 
 #include <sci.h>
-#include <gio.h>
+//#include <gio.h>
 #include "string.h"
 #include "stdarg.h"
 #include "stdio.h"
@@ -39,22 +39,32 @@ static volatile uint64_t serialData = 0;
 
 void UARTSend(sciBASE_t *sci, char data[])
 {
-	char *first = &data[0];
-	sciSend(sci, strlen(data),(uint8 *)first);
+
+#ifndef SIMULATING
+
+    char* first = &data[0];
+    sciSend(sci, strlen(data), (uint8*)first);
+
+#endif // !SIMULATING
+
 }
 
 void UARTInit(sciBASE_t *sci, uint32 baud)
 {
+
+#ifndef SIMULATING
 	_enable_IRQ();
 	sciInit();
 	sciSetBaudrate(sci, baud);
 
 	sciEnableNotification(sci, SCI_RX_INT);
 	sciReceive(sci, 1, (unsigned char*)NULL); // clear interrupt flag
+#endif //!SIMULATING
 }
 
 void UARTprintf(const char *_format, ...)
 {
+
    char str[128];
    memset(str, '\0', 128 * sizeof(char));
    int8_t length = -1;
@@ -69,7 +79,11 @@ void UARTprintf(const char *_format, ...)
 
    if (length > 0)
    {
-	  sciSend(PC_UART, (unsigned)length, (unsigned char*)str);
+
+
+#ifndef SIMULATING
+       sciSend(PC_UART, (unsigned)length, (unsigned char*)str);
+#endif // !SIMULATING
    }
 }
 
@@ -90,10 +104,14 @@ void UARTprintln(const char *_format, ...)
 
 	if (length > 0)
 	{
-		sciSend(PC_UART, (unsigned)length, (unsigned char*)str);
+#ifndef SIMULATING
 
-		// only diff between this and UARTprintf because passing variable args between functions in C are weird and I don't wanna deal with it rn 
-		sciSend(PC_UART, 2, "\r\n");
+
+        sciSend(PC_UART, (unsigned)length, (unsigned char*)str);
+
+        // only diff between this and UARTprintf because passing variable args between functions in C are weird and I don't wanna deal with it rn 
+        sciSend(PC_UART, 2, "\r\n");
+#endif // !SIMULATING
 	}
 }
 
@@ -101,7 +119,11 @@ pedal_reading_t getSerialPedalData()
 {
 	while(messageCounter < NUMBER_OF_SIMULATION_MESSAGES);
 
-	gioSetBit(gioPORTA, 5, 1);
+#ifndef SIMULATING
+
+    gioSetBit(gioPORTA, 5, 1);
+
+#endif // !SIMULATING
 
 	// extract and parse the byte message. See VCU Firmware Simulation document 
 	pedal_reading_t ret = {
@@ -118,7 +140,13 @@ pedal_reading_t getSerialPedalData()
 	char buffer[32];
 	snprintf(buffer, 32, "%d %d %d", ret.fp1, ret.fp2, ret.bse);
 	Log(buffer);
-	FlushLogger(2);
+
+#ifndef SIMULATING
+
+    FlushLogger(2);
+
+#endif // !SIMULATING
+
 
 	return ret;
 }
