@@ -12,10 +12,8 @@
 #include "stdarg.h"
 #include "hal_stdtypes.h"
 
-typedef __int32 int32;
-typedef unsigned __int32 uint32;
-/* ... etc. ... */
-
+//for testing during decoupling project
+#define SIMULATING
 
 bool any(uint8_t num, ...);
 bool all(uint8_t num, ...);
