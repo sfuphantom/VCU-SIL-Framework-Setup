@@ -3,7 +3,7 @@
 
 #include "FreeRTOS.h"
 #include "FreeRTOSConfig.h"
-#include "os_queue.h"
+#include "queue.h"
 #include "os_task.h"
 #include "os_timer.h"
 #include "task_config.h"

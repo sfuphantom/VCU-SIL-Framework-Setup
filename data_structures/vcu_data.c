@@ -5,7 +5,7 @@
  *      Author: soroush, Josh Guo
  */
 #include "FreeRTOS.h"
-#include "os_semphr.h"
+#include "semphr.h"
 
 #define VCUDATA_PRIVLEDGED_ACCESS
 #include "vcu_data.h"
