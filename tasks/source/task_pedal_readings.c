@@ -15,7 +15,7 @@
 #include "math.h"
 
 /* Halcogen drivers */
-//#include "sys_common.h"
+#include "sys_common.h"
 //#include "adc.h"
 //#include "gio.h"
 
