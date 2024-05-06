@@ -54,7 +54,7 @@ void NotifyStateMachineFromTimer(TimerHandle_t timer)
 
 	static char buffer[64];
 	snprintf(buffer, 64, "(%s:%d): Expired after %dms", pcTimerGetTimerName(timer), event, xTimerGetPeriod(timer));
-	//LogColor(YEL, buffer);
+	LogColor(YEL, buffer);
 
 	HandleEvent(UpdateStateMachine, event);
 }

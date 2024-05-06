@@ -9,7 +9,7 @@
 #define PHANTOM_DRIVERS_STATE_MACHINE_STATE_MACHINE_H_
 
 #include "vcu_common.h"
-//#include "phantom_timer.h"
+#include "phantom_timer.h"
 
 
 void StateMachineInit(SystemTasks_t tasks);
