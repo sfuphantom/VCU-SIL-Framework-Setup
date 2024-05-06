@@ -79,7 +79,7 @@ void UARTprintf(const char *_format, ...)
 
    if (length > 0)
    {
-
+       printf((unsigned char*)str);
 
 #ifndef SIMULATING
        sciSend(PC_UART, (unsigned)length, (unsigned char*)str);
@@ -104,6 +104,8 @@ void UARTprintln(const char *_format, ...)
 
 	if (length > 0)
 	{
+        printf(str);
+        printf("\n");
 #ifndef SIMULATING
 
 
@@ -140,12 +142,8 @@ pedal_reading_t getSerialPedalData()
 	char buffer[32];
 	snprintf(buffer, 32, "%d %d %d", ret.fp1, ret.fp2, ret.bse);
 	Log(buffer);
-
-#ifndef SIMULATING
-
     FlushLogger(2);
 
-#endif // !SIMULATING
 
 
 	return ret;
