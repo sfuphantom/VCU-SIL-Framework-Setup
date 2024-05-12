@@ -89,14 +89,21 @@ static void vPedalReadingsTask(void* arg)
 
 #ifdef SIMULATING
 
+        //the following needs to late enough such that the throttle thread is initialized before we attempt to 
+        //to modify the state machine (which intern resumes/suspends the throttle)
         count++;
-        if (count == 20)
+        if (count%31 == 20)
         {
             NotifyStateMachine(EVENT_TRACTIVE_ON);
         }
-        if (count == 24)
+        if (count%31 == 24)
         {
             NotifyStateMachine(EVENT_READY_TO_DRIVE);
+        }
+
+        if (count%31 == 30)
+        {
+            NotifyStateMachine(EVENT_RESET_CAR);
         }
 
 #endif // 
@@ -139,7 +146,7 @@ static pedal_reading_t ReadPedals()
     return (pedal_reading_t) { FP_data[0].value, FP_data[1].value, FP_data[2].value };
 
 #else
-    return (pedal_reading_t) { 1500, 1500, 1500 };
+    return (pedal_reading_t) { 15000000, 15000, 1500 };
 
 #endif
 
