@@ -79,17 +79,11 @@ TaskHandle_t ThrottleInit(void)
 		&taskHandle
 	);
 
-    //faultTimers.APPS1Range = Phantom_createTimer("Apps1RangeCheck", 100, NO_RELOAD, EVENT_APPS1_RANGE_FAULT, NotifyStateMachineFromTimer);
-    //faultTimers.APPS2Range = Phantom_createTimer("Apps2RangeCheck", 100, NO_RELOAD, EVENT_APPS2_RANGE_FAULT, NotifyStateMachineFromTimer);
-    //faultTimers.BSERange = Phantom_createTimer("BseRangeCheck", 100, NO_RELOAD, EVENT_BSE_RANGE_FAULT, NotifyStateMachineFromTimer);
-    //faultTimers.FPDiff = Phantom_createTimer("FpDiffCheck", 100, NO_RELOAD, EVENT_FP_DIFF_FAULT, NotifyStateMachineFromTimer);
-    //faultTimers.RTDS = Phantom_createTimer("RTDSSwitch", 2000, NO_RELOAD, 0, NotifyStateMachineFromTimer); 
-
-    faultTimers.APPS1Range = Phantom_createTimer("Apps1RangeCheck", 100, 1, EVENT_APPS1_RANGE_FAULT, NotifyStateMachineFromTimer);
-    faultTimers.APPS2Range = Phantom_createTimer("Apps2RangeCheck", 100, 1, EVENT_APPS2_RANGE_FAULT, NotifyStateMachineFromTimer);
-    faultTimers.BSERange = Phantom_createTimer("BseRangeCheck", 100, 1, EVENT_BSE_RANGE_FAULT, NotifyStateMachineFromTimer);
-    faultTimers.FPDiff = Phantom_createTimer("FpDiffCheck", 100, 1, EVENT_FP_DIFF_FAULT, NotifyStateMachineFromTimer);
-    faultTimers.RTDS = Phantom_createTimer("RTDSSwitch", 2000, 1, 0, NotifyStateMachineFromTimer);
+    faultTimers.APPS1Range = Phantom_createTimer("Apps1RangeCheck", 100, NO_RELOAD, EVENT_APPS1_RANGE_FAULT, NotifyStateMachineFromTimer);
+    faultTimers.APPS2Range = Phantom_createTimer("Apps2RangeCheck", 100, NO_RELOAD, EVENT_APPS2_RANGE_FAULT, NotifyStateMachineFromTimer);
+    faultTimers.BSERange = Phantom_createTimer("BseRangeCheck", 100, NO_RELOAD, EVENT_BSE_RANGE_FAULT, NotifyStateMachineFromTimer);
+    faultTimers.FPDiff = Phantom_createTimer("FpDiffCheck", 100, NO_RELOAD, EVENT_FP_DIFF_FAULT, NotifyStateMachineFromTimer);
+    faultTimers.RTDS = Phantom_createTimer("RTDSSwitch", 2000, NO_RELOAD, 0, NotifyStateMachineFromTimer);
 
     MCP48FV_Init();
 
@@ -103,9 +97,9 @@ void SuspendThrottle(TaskHandle_t self)
     if (self == taskHandle)
     {
         MCP48FV_Set_Value(0); // send throttle value to DAC driver
-        LogColor(1, "Turning off throttle");
+        LogColor(RED, "Turning off throttle");
 
-		LogColor(1, "Suspending throttle task.");
+		LogColor(RED, "Suspending throttle task.");
         vTaskSuspend(self);
     }
     #else
@@ -141,7 +135,7 @@ static void vThrottleTask(void* arg)
         float apps_percent_avg = (apps1PedalPercent + apps2PedalPercent) / 2;
         int16_t throttle = MAP_PERCENT_TO_VOLTAGE(apps_percent_avg);
 
-        MCP48FV_Set_Value(throttle); 
+       MCP48FV_Set_Value(throttle); 
 
     }
 }
