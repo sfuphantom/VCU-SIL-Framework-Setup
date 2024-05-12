@@ -27,6 +27,7 @@
 #include "task_pedal_readings.h"
 #include "task_logger.h"
 #include "task_event_handler.h"
+#include "state_machine.h"   
 
 
 typedef struct PedalReadings_t{
@@ -69,10 +70,14 @@ TaskHandle_t PedalReadingsInit(void)
 
 	footPedals.prevReadings = (pedal_reading_t) {0, 0 ,0};
 
+
+
 	return ret == pdPASS && footPedals.pipeline.q ? footPedals.pipeline.taskHandle : NULL;
 }
 
 /* Internal Implementation */
+
+int count = 0;
 
 static void vPedalReadingsTask(void* arg)
 {
@@ -81,6 +86,21 @@ static void vPedalReadingsTask(void* arg)
 	while(true)
 	{
 		footPedals.readings = ReadPedals();
+
+#ifdef SIMULATING
+
+        count++;
+        if (count == 20)
+        {
+            NotifyStateMachine(EVENT_TRACTIVE_ON);
+        }
+        if (count == 24)
+        {
+            NotifyStateMachine(EVENT_READY_TO_DRIVE);
+        }
+
+#endif // 
+
 
 		// apply a low pass filter with ALPHA of 0.5
 		footPedals.readings.fp1 = (footPedals.readings.fp1 + footPedals.prevReadings.fp1) >> 1;
@@ -100,22 +120,26 @@ static void vPedalReadingsTask(void* arg)
 static pedal_reading_t ReadPedals()
 {
 
-	#ifndef VCU_SIM_MODE 
-	// delay must occur here because sim mode has no delay (frequency determined by incoming serial data)
-	vTaskDelay(pdMS_TO_TICKS(20)); 
-
-    #ifndef SIMULATING 
-
-	// Get pedal readings from ADC
-	adcData_t FP_data[3];
-	adcStartConversion(adcREG1, adcGROUP1);
-	while (!adcIsConversionComplete(adcREG1, adcGROUP1)); // prefer another method of waiting, maybe an interrupt with TaskSuspend/Resume/YIELD?
-	adcGetData(adcREG1, adcGROUP1, FP_data);
+#ifndef VCU_SIM_MODE 
+    // delay must occur here because sim mode has no delay (frequency determined by incoming serial data)
+    vTaskDelay(pdMS_TO_TICKS(20));
 
 
+#ifndef SIMULATING 
 
-	// must map each value explicitly because compiler may not have the same mem packing rules for struct as arrays
-	return (pedal_reading_t) {FP_data[0].value, FP_data[1].value, FP_data[2].value};
+    // Get pedal readings from ADC
+    adcData_t FP_data[3];
+    adcStartConversion(adcREG1, adcGROUP1);
+    while (!adcIsConversionComplete(adcREG1, adcGROUP1)); // prefer another method of waiting, maybe an interrupt with TaskSuspend/Resume/YIELD?
+    adcGetData(adcREG1, adcGROUP1, FP_data);
+
+
+
+    // must map each value explicitly because compiler may not have the same mem packing rules for struct as arrays
+    return (pedal_reading_t) { FP_data[0].value, FP_data[1].value, FP_data[2].value };
+
+#else
+    return (pedal_reading_t) { 1500, 1500, 1500 };
 
 #endif
 
@@ -138,6 +162,9 @@ static void SetBrakeLight(uint8_t value)
         gioSetBit(BRAKE_LIGHT, value);
     }
 #endif // !1
+    char buffer[32];
+    sprintf(buffer, "Setting brakelight: %d", value);
+    Log(buffer);
     return NULL;
 
 }
