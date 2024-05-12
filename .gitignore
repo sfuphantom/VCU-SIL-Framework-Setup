@@ -1,0 +1,9 @@
+.jxbrowser-data/
+.metadata/
+tags
+tags.lock
+RemoteSystemsTempFiles/
+
+# .opendb files raise a permission error when attempting to commit
+
+*.opendb
