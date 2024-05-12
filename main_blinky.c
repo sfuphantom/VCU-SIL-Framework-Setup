@@ -91,10 +91,11 @@
 #include "timers.h"
 #include "semphr.h"
 
- #include "tasks\headers\task_throttle.h"
- #include "tasks\headers\task_pedal_readings.h"
-// #include "tasks\headers\task_event_handler.h"
-// #include "tasks\headers\task_logger.h"
+#include "task_throttle.h"
+#include "task_pedal_readings.h"
+#include "task_event_handler.h"
+#include "task_logger.h"
+#include "state_machine.h"
 //hello
 
 /* Priorities at which the tasks are created. */
@@ -143,25 +144,58 @@ static TimerHandle_t xTimer = NULL;
 
 void phantomTasksInit()
 {
-    //SystemTasks_t t = {
-    //    .EventHandler = EventHandlerInit(),
-    //    .Logger = LoggerInit(),
-    //    .Throttle = ThrottleInit(),
-    //    .PedalReadings = PedalReadingsInit()
-    //};
+
+
     SystemTasks_t t = {
-    .EventHandler =  NULL,
-    .Logger = NULL,
-    .Throttle = ThrottleInit(),
-    .PedalReadings = NULL,
+        .EventHandler = EventHandlerInit(),
+        .Logger = LoggerInit(),
+        .Throttle = ThrottleInit(),
+        .PedalReadings = PedalReadingsInit()
     };
 
- /*   if (!all(4, t.EventHandler, t.Logger, t.Throttle, t.PedalReadings))
+    if (!all(4, t.EventHandler, t.Logger, t.Throttle, t.PedalReadings))
     {
         while (1) UARTprintln("Some tasks not initialized: %d, %d, %d, %d", t.EventHandler, t.Logger, t.Throttle, t.PedalReadings);
-    }*/
+    }
 
-    //StateMachineInit(t);
+    StateMachineInit(t);
+    //ResumeTaskThrottle();
+}
+
+void phantomDriversInit()
+{
+    /* Phantom Library Initialization */
+    VCUData_init();             // Initialize VCU Data Structure
+    //RTD_Buzzer_Init();          // Initialize Ready to Drive buzzer
+    //RGB_init();             // Initialize RGB LEDs to start off
+
+    //    rtiInit();
+    //    rtiEnableNotification(rtiNOTIFICATION_COMPARE1);
+    //    _enable_IRQ();
+    //    rtiStartCounter(rtiNOTIFICATION_COUNTER1);
+    //    uint32 x= rtiGetPeriod(rtiNOTIFICATION_COMPARE1);
+}
+
+
+void main_phantom(void)
+{
+    /* USER CODE BEGIN (3) */
+
+    //halcogenInit();
+
+    phantomDriversInit();
+
+    //UARTInit(PC_UART, 460800); // something up above overwrites the configuration set here. Make sure this goes last!
+
+    phantomTasksInit();
+
+    UARTprintln("Starting scheduler!");
+
+    vTaskStartScheduler();
+
+    while (1) UARTprintf("Scheduler exited!");
+
+    /* USER CODE END */
 }
 
 /*** SEE THE COMMENTS AT THE TOP OF THIS FILE ***/
@@ -330,5 +364,3 @@ void vBlinkyKeyboardInterruptHandler( int xKeyPressed )
         break;
     }
 }
-
-

@@ -219,7 +219,7 @@ int main( void )
      * of this file. */
     #if ( mainCREATE_SIMPLE_BLINKY_DEMO_ONLY == 1 )
         {
-            main_blinky();
+            main_phantom();
         }
     #else
         {
