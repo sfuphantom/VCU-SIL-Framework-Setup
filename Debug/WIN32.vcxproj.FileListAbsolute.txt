@@ -1,0 +1,1 @@
+C:\Users\klitv\FreeRTOSv202212.01\FreeRTOS\Demo\WIN32-MSVC\Debug\RTOSDemo.exe
