@@ -276,12 +276,6 @@
     <ClInclude Include="Drivers\STATE_MACHINE\state_machine.h">
       <Filter>Configuration Files</Filter>
     </ClInclude>
-    <ClInclude Include="halcogen_vcu\include\os_task.h">
-      <Filter>Configuration Files</Filter>
-    </ClInclude>
-    <ClInclude Include="halcogen_vcu\include\os_queue.h">
-      <Filter>Configuration Files</Filter>
-    </ClInclude>
     <ClInclude Include="tasks\headers\task_throttle.h">
       <Filter>Configuration Files</Filter>
     </ClInclude>

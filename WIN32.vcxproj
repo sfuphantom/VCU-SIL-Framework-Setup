@@ -166,8 +166,6 @@
     <ClInclude Include="..\..\Source\include\queue.h" />
     <ClInclude Include="..\..\Source\include\semphr.h" />
     <ClInclude Include="..\..\Source\include\task.h" />
-    <ClInclude Include="halcogen_vcu\include\os_queue.h" />
-    <ClInclude Include="halcogen_vcu\include\os_task.h" />
     <ClInclude Include="hardware\launchpad_hw\board_hardware.h" />
     <ClInclude Include="hardware\vcu_hw\board_hardware.h" />
     <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\adc.h" />
