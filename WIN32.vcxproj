@@ -39,7 +39,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\..\Source\include;..\..\Source\portable\MSVC-MingW;..\Common\Include;..\..\..\FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include;.\Trace_Recorder_Configuration;.\data_structures;.\tasks\headers;.\tasks\source;.\hercules-phantom-lib\hercules-phantom-lib\rtos-common\;.\Drivers\UART;.\Drivers\STATE_MACHINE;.\hardware\vcu_hw;.\halcogen_vcu\include_sim\;.\tasks\;.\Drivers\DAC_SPI\;.\halcogen_vcu\include_sim_source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FreeRTOS\Source\include;FreeRTOS\Source\portable\MSVC-MingW;FreeRTOS\Common\Include;FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include;.\Trace_Recorder_Configuration;.\data_structures;.\tasks\headers;.\tasks\source;.\hercules-phantom-lib\hercules-phantom-lib\rtos-common\;.\Drivers\UART;.\Drivers\STATE_MACHINE;.\hardware\vcu_hw;.\halcogen_vcu\include_sim\;.\tasks\;.\Drivers\DAC_SPI\;.\halcogen_vcu\include_sim_source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0601;WINVER=0x400;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -74,38 +74,38 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\trcKernelPort.c" />
-    <ClCompile Include="..\..\..\FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\trcSnapshotRecorder.c" />
-    <ClCompile Include="..\..\Source\event_groups.c" />
-    <ClCompile Include="..\..\Source\portable\MemMang\heap_5.c" />
-    <ClCompile Include="..\..\Source\stream_buffer.c" />
-    <ClCompile Include="..\..\Source\timers.c" />
-    <ClCompile Include="..\Common\Minimal\AbortDelay.c" />
-    <ClCompile Include="..\Common\Minimal\BlockQ.c" />
-    <ClCompile Include="..\Common\Minimal\blocktim.c" />
-    <ClCompile Include="..\Common\Minimal\countsem.c" />
-    <ClCompile Include="..\Common\Minimal\death.c" />
-    <ClCompile Include="..\Common\Minimal\dynamic.c" />
-    <ClCompile Include="..\Common\Minimal\EventGroupsDemo.c" />
-    <ClCompile Include="..\Common\Minimal\flop.c" />
-    <ClCompile Include="..\Common\Minimal\GenQTest.c" />
-    <ClCompile Include="..\Common\Minimal\integer.c" />
-    <ClCompile Include="..\Common\Minimal\IntSemTest.c" />
-    <ClCompile Include="..\Common\Minimal\MessageBufferAMP.c" />
-    <ClCompile Include="..\Common\Minimal\PollQ.c" />
-    <ClCompile Include="..\Common\Minimal\QPeek.c" />
-    <ClCompile Include="..\Common\Minimal\QueueOverwrite.c" />
-    <ClCompile Include="..\Common\Minimal\QueueSet.c" />
-    <ClCompile Include="..\Common\Minimal\QueueSetPolling.c" />
-    <ClCompile Include="..\Common\Minimal\recmutex.c" />
-    <ClCompile Include="..\Common\Minimal\semtest.c" />
-    <ClCompile Include="..\Common\Minimal\StaticAllocation.c" />
-    <ClCompile Include="..\Common\Minimal\MessageBufferDemo.c" />
-    <ClCompile Include="..\Common\Minimal\StreamBufferDemo.c" />
-    <ClCompile Include="..\Common\Minimal\StreamBufferInterrupt.c" />
-    <ClCompile Include="..\Common\Minimal\TaskNotify.c" />
-    <ClCompile Include="..\Common\Minimal\TaskNotifyArray.c" />
-    <ClCompile Include="..\Common\Minimal\timerdemo.c" />
+    <ClCompile Include="FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\trcKernelPort.c" />
+    <ClCompile Include="FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\trcSnapshotRecorder.c" />
+    <ClCompile Include="FreeRTOS\Source\event_groups.c" />
+    <ClCompile Include="FreeRTOS\Source\portable\MemMang\heap_5.c" />
+    <ClCompile Include="FreeRTOS\Source\stream_buffer.c" />
+    <ClCompile Include="FreeRTOS\Source\timers.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\AbortDelay.c"/>
+    <ClCompile Include="FreeRTOS\Common\Minimal\BlockQ.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\blocktim.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\countsem.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\death.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\dynamic.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\EventGroupsDemo.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\flop.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\GenQTest.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\integer.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\IntSemTest.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\MessageBufferAMP.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\PollQ.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\QPeek.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\QueueOverwrite.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\QueueSet.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\QueueSetPolling.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\recmutex.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\semtest.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\StaticAllocation.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\MessageBufferDemo.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\StreamBufferDemo.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\StreamBufferInterrupt.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\TaskNotify.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\TaskNotifyArray.c" />
+    <ClCompile Include="FreeRTOS\Common\Minimal\timerdemo.c" />
     <ClCompile Include="data_structures\vcu_common.c" />
     <ClCompile Include="data_structures\vcu_data.c" />
     <ClCompile Include="Drivers\DAC_SPI\MCP48FV_DAC_SPI.c" />
@@ -118,19 +118,19 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="..\..\Source\list.c">
+    <ClCompile Include="FreeRTOS\Source\list.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="..\..\Source\portable\MSVC-MingW\port.c">
+    <ClCompile Include="FreeRTOS\Source\portable\MSVC-MingW\port.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="..\..\Source\queue.c">
+    <ClCompile Include="FreeRTOS\Source\queue.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <ClCompile Include="..\..\Source\tasks.c">
+    <ClCompile Include="FreeRTOS\Source\tasks.c">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
@@ -143,13 +143,13 @@
     <ClCompile Include="tasks\source\task_watchdog.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include\trcKernelPort.h" />
-    <ClInclude Include="..\..\..\FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include\trcRecorder.h" />
-    <ClInclude Include="..\..\Source\include\event_groups.h" />
-    <ClInclude Include="..\..\Source\include\message_buffer.h" />
-    <ClInclude Include="..\..\Source\include\stream_buffer.h" />
-    <ClInclude Include="..\..\Source\include\timers.h" />
-    <ClInclude Include="..\..\Source\portable\MSVC-MingW\portmacro.h" />
+    <ClInclude Include="FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include\trcKernelPort.h" />
+    <ClInclude Include="FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include\trcRecorder.h" />
+    <ClInclude Include="FreeRTOS\Source\include\event_groups.h" />
+    <ClInclude Include="FreeRTOS\Source\include\message_buffer.h" />
+    <ClInclude Include="FreeRTOS\Source\include\stream_buffer.h" />
+    <ClInclude Include="FreeRTOS\Source\include\timers.h" />
+    <ClInclude Include="FreeRTOS\Source\portable\MSVC-MingW\portmacro.h" />
     <ClInclude Include="data_structures\vcu_common.h" />
     <ClInclude Include="data_structures\vcu_data.h" />
     <ClInclude Include="Drivers\DAC_SPI\MCP48FV_DAC_SPI.h" />
@@ -159,13 +159,13 @@
     <ClInclude Include="Drivers\STATE_MACHINE\state_machine.h" />
     <ClInclude Include="Drivers\UART\Phantom_sci.h" />
     <ClInclude Include="FreeRTOSConfig.h" />
-    <ClInclude Include="..\..\Source\include\FreeRTOS.h" />
-    <ClInclude Include="..\..\Source\include\list.h" />
-    <ClInclude Include="..\..\Source\include\portable.h" />
-    <ClInclude Include="..\..\Source\include\projdefs.h" />
-    <ClInclude Include="..\..\Source\include\queue.h" />
-    <ClInclude Include="..\..\Source\include\semphr.h" />
-    <ClInclude Include="..\..\Source\include\task.h" />
+    <ClInclude Include="FreeRTOS\Source\include\FreeRTOS.h" />
+    <ClInclude Include="FreeRTOS\Source\include\list.h" />
+    <ClInclude Include="FreeRTOS\Source\include\portable.h" />
+    <ClInclude Include="FreeRTOS\Source\include\projdefs.h" />
+    <ClInclude Include="FreeRTOS\Source\include\queue.h" />
+    <ClInclude Include="FreeRTOS\Source\include\semphr.h" />
+    <ClInclude Include="FreeRTOS\Source\include\task.h" />
     <ClInclude Include="hardware\launchpad_hw\board_hardware.h" />
     <ClInclude Include="hardware\vcu_hw\board_hardware.h" />
     <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\PHAL\HAL\include\adc.h" />
