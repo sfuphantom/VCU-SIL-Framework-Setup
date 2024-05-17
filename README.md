@@ -49,8 +49,7 @@ To run the application, follow these steps:
 - Initializing submodules is crucial for the proper functioning of the framework.
 
 ## Troubleshooting
-If you encounter any issues during setup or execution, please refer to the documentation or contact @kevinl03
-
+If you encounter any issues during setup or execution, please refer to the documentation in the Team Phantom Google Drive or contact [@kevinl03](https://github.com/kevinl03)
 
 ## Acknowledgements
 This framework is built upon various open-source libraries and tools including freeRTOS kernel https://www.freertos.org/FAQWhat.html
