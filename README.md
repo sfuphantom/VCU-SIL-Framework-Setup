@@ -32,7 +32,10 @@ This repository serves the purpose of emulating the VCU (Vehicle Control Unit) b
 ## Running the Application
 To run the application, follow these steps:
 
-1. Open the project in Visual Studio 2022.
+1. Open the project in Visual Studio 2022 with administrator priveledges
+
+<img width="511" alt="image" align="centre" src="https://github.com/sfuphantom/VCU-SIL-Framework-Setup/assets/89829682/031b06ba-e835-4fb8-b4af-dd74f5fb7f1c">
+
    
 2. Ensure that Visual Studio 2022 is set up correctly for C++ development.
 
