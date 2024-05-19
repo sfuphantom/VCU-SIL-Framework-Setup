@@ -24,6 +24,8 @@ typedef struct {
 #endif
 } Pipe;
 
+Pipe SimulationPipe;
+
 // Function to connect to the named pipe
 Pipe connect_to_pipe(const char* pipe_path);
 
