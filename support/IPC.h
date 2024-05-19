@@ -41,3 +41,5 @@ void close_pipe(Pipe pipe);
 
 int Test_Pipe_Main();
 
+void initializeSimulationPipe();
+

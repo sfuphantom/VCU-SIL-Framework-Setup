@@ -99,6 +99,21 @@ void close_pipe(Pipe pipe) {
 #endif
 }
 
+void initializeSimulationPipe()
+{
+    fflush(stdout);
+    const char* pipe_path =
+#ifdef OS_Windows
+        "\\\\.\\pipe\\my_pipe";
+#else
+        //Linux Development
+        "my_pipe";
+#endif
+    printf("Connecting to pipe\n");
+
+    connect_to_pipe(pipe_path);
+}
+
 int Test_Pipe_Main() {
     fflush(stdout);
     const char* pipe_path =
