@@ -1,5 +1,7 @@
 #include "IPC.h"
 
+Pipe SimulationPipe;
+
 // Function to connect to the named pipe
 Pipe connect_to_pipe(const char* pipe_path) {
     Pipe pipe;
@@ -15,7 +17,7 @@ Pipe connect_to_pipe(const char* pipe_path) {
     );
     if (pipe.handle == INVALID_HANDLE_VALUE) {
         fprintf(stderr, "Error opening pipe: %d\n", GetLastError());
-        exit(EXIT_FAILURE);
+        return;
     }
 #else
     pipe.fd = open(pipe_path, O_RDWR);
@@ -25,6 +27,7 @@ Pipe connect_to_pipe(const char* pipe_path) {
         exit(EXIT_FAILURE);
     }
 #endif
+    SimulationPipe = pipe;
     return pipe;
 }
 
@@ -97,7 +100,6 @@ void close_pipe(Pipe pipe) {
 
 int Test_Pipe_Main() {
     fflush(stdout);
-    printf("what the hell is going on");
     const char* pipe_path =
 #ifdef OS_Windows
         "\\\\.\\pipe\\my_pipe";
@@ -105,7 +107,6 @@ int Test_Pipe_Main() {
         "my_pipe";
 #endif
     printf("About to connect my pipe");
-    //Pipe pipeCreated = create_pipe(pipe_path);
 
     Pipe pipe = connect_to_pipe(pipe_path);
 
@@ -143,7 +144,7 @@ int Test_Pipe_Main() {
     }
 
     // Close the pipe handle
-    close_pipe(pipe);
+    //close_pipe(pipe);
 
     return 0;
 }
