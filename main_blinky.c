@@ -147,7 +147,6 @@ static TimerHandle_t xTimer = NULL;
 
 void phantomTasksInit()
 {
-    Test_Pipe_Main();
 
     SystemTasks_t t = {
         .EventHandler = EventHandlerInit(),
