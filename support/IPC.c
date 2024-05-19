@@ -1,4 +1,5 @@
 #include "IPC.h"
+#include "ansi_colors.h"
 
 Pipe SimulationPipe;
 
@@ -17,7 +18,7 @@ Pipe connect_to_pipe(const char* pipe_path) {
         NULL
     );
     if (pipe.handle == INVALID_HANDLE_VALUE) {
-        fprintf(stderr, "Error opening pipe: %d\n", GetLastError());
+        printf("%sError opening pipe: %d%s\n", RED, GetLastError(), CRESET);
         return;
     }
 #else
@@ -109,7 +110,7 @@ void initializeSimulationPipe()
         //Linux Development
         "my_pipe";
 #endif
-    printf("Connecting to pipe\n");
+    printf("%sConnecting to pipe\n%s", GRN, CRESET);
 
     connect_to_pipe(pipe_path);
 }
