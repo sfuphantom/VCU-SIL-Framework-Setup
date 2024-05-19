@@ -27,6 +27,7 @@ typedef struct {
 Pipe SimulationPipe;
 
 // Function to connect to the named pipe
+//IMPORTANT: Executing program must run with administrator permissions in order to connect to pipe
 Pipe connect_to_pipe(const char* pipe_path);
 
 // Function to read from the named pipe
