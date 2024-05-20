@@ -142,9 +142,11 @@ static TimerHandle_t xTimer = NULL;
 
 /*-----------------------------------------------------------*/
 
+#include "IPC.h"
+
+
 void phantomTasksInit()
 {
-
 
     SystemTasks_t t = {
         .EventHandler = EventHandlerInit(),
@@ -161,6 +163,8 @@ void phantomTasksInit()
     StateMachineInit(t);
     //ResumeTaskThrottle();
 }
+
+
 
 void phantomDriversInit()
 {
