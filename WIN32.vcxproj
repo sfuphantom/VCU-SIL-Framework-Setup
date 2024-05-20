@@ -39,7 +39,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>FreeRTOS\Source\include;FreeRTOS\Source\portable\MSVC-MingW;FreeRTOS\Common\Include;FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include;.\Trace_Recorder_Configuration;.\data_structures;.\tasks\headers;.\tasks\source;.\hercules-phantom-lib\rtos-common\;.\Drivers\UART;.\Drivers\STATE_MACHINE;.\hardware\vcu_hw;.\halcogen_vcu\include_sim\;.\tasks\;.\Drivers\DAC_SPI\;.\halcogen_vcu\include_sim_source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>FreeRTOS\Source\include;FreeRTOS\Source\portable\MSVC-MingW;FreeRTOS\Common\Include;FreeRTOS-Plus\Source\FreeRTOS-Plus-Trace\Include;.\Trace_Recorder_Configuration;.\data_structures;.\tasks\headers;.\tasks\source;.\hercules-phantom-lib\rtos-common\;.\Drivers\UART;.\Drivers\STATE_MACHINE;.\hardware\vcu_hw;.\halcogen_vcu\include_sim\;.\tasks\;.\Drivers\DAC_SPI\;.\halcogen_vcu\include_sim_source\;.\support\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WIN32_WINNT=0x0601;WINVER=0x400;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -137,6 +137,7 @@
     <ClCompile Include="main_blinky.c" />
     <ClCompile Include="main_full.c" />
     <ClCompile Include="Run-time-stats-utils.c" />
+    <ClCompile Include="support\IPC.c" />
     <ClCompile Include="tasks\source\task_eeprom.c" />
     <ClCompile Include="tasks\source\task_pedal_readings.c" />
     <ClCompile Include="tasks\source\task_throttle.c" />
@@ -248,6 +249,7 @@
     <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\rtos-common\task_event_handler.h" />
     <ClInclude Include="hercules-phantom-lib\hercules-phantom-lib\rtos-common\task_logger.h" />
     <ClInclude Include="support\execution_timer.h" />
+    <ClInclude Include="support\IPC.h" />
     <ClInclude Include="tasks\headers\task_eeprom.h" />
     <ClInclude Include="tasks\headers\task_pedal_readings.h" />
     <ClInclude Include="tasks\headers\task_throttle.h" />
