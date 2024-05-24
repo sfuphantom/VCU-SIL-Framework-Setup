@@ -117,6 +117,23 @@ void UARTprintln(const char *_format, ...)
 	}
 }
 
+pedal_reading_t extractPedalEncoding(uint64_t data)
+{
+	// extract and parse the byte message. See VCU Firmware Simulation document 
+	pedal_reading_t ret = {
+		.fp1 = (serialData & 0b111111111111) + 1500,
+		.fp2 = ((serialData & 0b1111111111 << 12) >> 12) + 500,
+		.bse = ((serialData & (unsigned int)(0b111111111111 << 22)) >> 22) + 1500
+	};
+
+	// log for debugging 
+	char buffer[32];
+	snprintf(buffer, 32, "%d %d %d", ret.fp1, ret.fp2, ret.bse);
+	Log(buffer);
+	FlushLogger(2);
+
+}
+
 pedal_reading_t getSerialPedalData()
 {
 	while(messageCounter < NUMBER_OF_SIMULATION_MESSAGES);
@@ -127,23 +144,11 @@ pedal_reading_t getSerialPedalData()
 
 #endif // !SIMULATING
 
-	// extract and parse the byte message. See VCU Firmware Simulation document 
-	pedal_reading_t ret = {
-		.fp1=(serialData & 0b111111111111) + 1500,
-		.fp2=((serialData & 0b1111111111 << 12) >> 12) + 500,
-		.bse=((serialData & (unsigned int)(0b111111111111 << 22)) >> 22) + 1500
-	};
+	pedal_reading_t ret = extractPedalEncoding(serialData);
 
 	// reset volatile values
 	messageCounter = 0;
 	serialData = 0;
-
-	// log for debugging 
-	char buffer[32];
-	snprintf(buffer, 32, "%d %d %d", ret.fp1, ret.fp2, ret.bse);
-	Log(buffer);
-    FlushLogger(2);
-
 
 
 	return ret;
