@@ -72,6 +72,11 @@ int read_from_pipe(Pipe pipe, char* buffer, int buffer_size) {
 #endif
 }
 
+int Read_Pedal_Pipe(char* buffer, int buffer_size)
+{
+    return read_from_pipe(SimulationPipe, buffer, buffer_size);
+}
+
 // Function to write to the named pipe
 int write_to_pipe(Pipe pipe, const char* data, int data_size) {
 #ifdef OS_Windows
