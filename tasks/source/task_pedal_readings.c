@@ -29,6 +29,7 @@
 #include "task_event_handler.h"
 #include "state_machine.h"   
 
+#include "IPC.h"
 
 typedef struct PedalReadings_t{
 	PipeTask_t pipeline;
@@ -146,7 +147,12 @@ static pedal_reading_t ReadPedals()
     return (pedal_reading_t) { FP_data[0].value, FP_data[1].value, FP_data[2].value };
 
 #else
-    return (pedal_reading_t) { 15000000, 15000, 1500 };
+	#define BUFFERSIZE 100
+
+	char buffer[BUFFERSIZE];
+	while(Read_Pedal_Pipe(buffer, sizeof(uint64_t) != -1));
+	pedal_reading_t pedalreading = extractPedalEncoding((uint64_t)buffer);
+    //return (pedal_reading_t) { 15000000, 15000, 1500 };
 
 #endif
 

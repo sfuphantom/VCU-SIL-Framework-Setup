@@ -41,7 +41,7 @@ void close_pipe(Pipe pipe);
 
 int Test_Pipe_Main();
 
-void Read_Pedal_Pipe(char* buffer, int buffer_size);
+int Read_Pedal_Pipe(char* buffer, int buffer_size);
 
 void initializeSimulationPipe();
 
