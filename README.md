@@ -3,36 +3,24 @@
 ## **Introduction**
 
 This repository provides a hardware-less execution environment for the Team Phantom Vehicle Control Unit (VCU). By emulating the **FreeRTOS kernel** on Windows and Linux, it enables developers to execute, test, and modify the VCU firmware codebase in a virtualized environment.
-As a portable downstream target for SIL simulations, this repo lays the foundation for CI/CD automated testing.
+As a portable downstream target for SIL simulations, this repo lays the foundation for CI/CD automated testing of the [Formula SAE rules](https://www.fsaeonline.com/cdsweb/gen/documentresources.aspx)
+
+<p align="center">
+  <b>Architecture of Integrated Repos</b><br>
+  <img width="1536" height="1024" alt="Architecture of Integrated Repos"
+    src="https://github.com/user-attachments/assets/93a94388-26d7-41e6-9dc5-9ec54b8150c1" />
+</p>
 
 ### **Repository Integration & Orchestration**
 
 This repository acts as a central hub that orchestrates the following components:
 
-* **VCU Firmware Logic:** Utilizes production logic while abstracting the hardware abstraction layer (HAL) from the main VCU repositories:
-* [vcu-fw](https://github.com/sfuphantom/vcu-fw.git) — Core VCU control logic.
-* [hercules-phantom-lib](https://github.com/sfuphantom/hercules-phantom-lib) — Driver and utility libraries.
-
+* **VCU Firmware Logic:** Utilizes production logic while abstracting the hardware abstraction layer (HAL) from the main VCU repositories: <br>
+       </b>1. [vcu-fw](https://github.com/sfuphantom/vcu-fw.git) — Core VCU control logic.<br>
+       </b>2. [hercules-phantom-lib](https://github.com/sfuphantom/hercules-phantom-lib) — Driver and utility libraries.
 
 * **Real-Time Execution:** Emulates the [FreeRTOS Kernel](https://github.com/FreeRTOS/FreeRTOS-Kernel) (Windows/Linux Port) to provide deterministic task scheduling and multi-threading on a standard PC.
-* **Downstream Target:** Functions as the execution target for the [Python Testing Framework](https://github.com/sfuphantom/TestingFramework). It receives millisecond-interval sensor data via IPC pipes and returns real-time state logs.
-
-https://github.com/sfuphantom/VCU-SIL-Framework-Setup<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/93a94388-26d7-41e6-9dc5-9ec54b8150c1" />
-
-### **Key Benefits**
-
-* **Hardware Decoupling:** Modify and test VCU code without needing a TMS570 microcontroller.
-* **Cross-Platform:** Supports development on both Windows and Linux machines.
-* **CI/CD Ready:** Enables automated firmware validation within cloud-based runner environments.
-* **High Fidelity:** Uses the actual FreeRTOS scheduler to ensure that task priorities and timing logic remain consistent with the production vehicle.
-
----
-
-### **Quick Links**
-
-* **Upstream Controller:** [Python Testing Framework](https://github.com/sfuphantom/TestingFramework)
-* **Core Logic:** [vcu-fw](https://github.com/sfuphantom/vcu-fw)
-* **Kernel Source:** [FreeRTOS-Kernel](https://github.com/FreeRTOS/FreeRTOS-Kernel)
+* **Downstream Target:** This repositroy functions as the execution target for the [Python Testing Framework](https://github.com/sfuphantom/TestingFramework). It receives millisecond-interval sensor data via IPC pipes and returns real-time state logs.
 
 ## Requirements
 - Windows 10/11
