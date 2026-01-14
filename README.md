@@ -3,8 +3,7 @@
 ## **Introduction**
 
 This repository provides a hardware-less execution environment for the Team Phantom Vehicle Control Unit (VCU). By emulating the **FreeRTOS kernel** on Windows and Linux, it enables developers to execute, test, and modify the VCU firmware codebase in a virtualized environment.
-
-The VCU SIL (Software-in-the-Loop) framework decouples software logic from the physical microcontroller, allowing for rapid debugging and the foundation of an automated CI/CD pipeline without the need for physical hardware.
+As a portable downstream target for SIL simulations, this repo lays the foundation for CI/CD automated testing.
 
 ### **Repository Integration & Orchestration**
 
@@ -17,6 +16,8 @@ This repository acts as a central hub that orchestrates the following components
 
 * **Real-Time Execution:** Emulates the [FreeRTOS Kernel](https://github.com/FreeRTOS/FreeRTOS-Kernel) (Windows/Linux Port) to provide deterministic task scheduling and multi-threading on a standard PC.
 * **Downstream Target:** Functions as the execution target for the [Python Testing Framework](https://github.com/sfuphantom/TestingFramework). It receives millisecond-interval sensor data via IPC pipes and returns real-time state logs.
+
+https://github.com/sfuphantom/VCU-SIL-Framework-Setup<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/93a94388-26d7-41e6-9dc5-9ec54b8150c1" />
 
 ### **Key Benefits**
 
