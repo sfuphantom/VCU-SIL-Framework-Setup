@@ -1,7 +1,37 @@
 # VCU-SIL-Framework-Setup
 
-## Introduction
-This repository serves the purpose of emulating the VCU (Vehicle Control Unit) by running the FreeRTOS kernel on Windows. By doing so, it enables the testing and modification of the VCU firmware codebase while being decoupled from the hardware. The VCU SIL (Software-in-the-loop) framework facilitates developers in simulating VCU behavior and debugging software without the need for physical VCU hardware.
+## **Introduction**
+
+This repository provides a hardware-less execution environment for the Team Phantom Vehicle Control Unit (VCU). By emulating the **FreeRTOS kernel** on Windows and Linux, it enables developers to execute, test, and modify the VCU firmware codebase in a virtualized environment.
+
+The VCU SIL (Software-in-the-Loop) framework decouples software logic from the physical microcontroller, allowing for rapid debugging and the foundation of an automated CI/CD pipeline without the need for physical hardware.
+
+### **Repository Integration & Orchestration**
+
+This repository acts as a central hub that orchestrates the following components:
+
+* **VCU Firmware Logic:** Utilizes production logic while abstracting the hardware abstraction layer (HAL) from the main VCU repositories:
+* [vcu-fw](https://github.com/sfuphantom/vcu-fw.git) — Core VCU control logic.
+* [hercules-phantom-lib](https://github.com/sfuphantom/hercules-phantom-lib) — Driver and utility libraries.
+
+
+* **Real-Time Execution:** Emulates the [FreeRTOS Kernel](https://github.com/FreeRTOS/FreeRTOS-Kernel) (Windows/Linux Port) to provide deterministic task scheduling and multi-threading on a standard PC.
+* **Downstream Target:** Functions as the execution target for the [Python Testing Framework](https://github.com/sfuphantom/TestingFramework). It receives millisecond-interval sensor data via IPC pipes and returns real-time state logs.
+
+### **Key Benefits**
+
+* **Hardware Decoupling:** Modify and test VCU code without needing a TMS570 microcontroller.
+* **Cross-Platform:** Supports development on both Windows and Linux machines.
+* **CI/CD Ready:** Enables automated firmware validation within cloud-based runner environments.
+* **High Fidelity:** Uses the actual FreeRTOS scheduler to ensure that task priorities and timing logic remain consistent with the production vehicle.
+
+---
+
+### **Quick Links**
+
+* **Upstream Controller:** [Python Testing Framework](https://github.com/sfuphantom/TestingFramework)
+* **Core Logic:** [vcu-fw](https://github.com/sfuphantom/vcu-fw)
+* **Kernel Source:** [FreeRTOS-Kernel](https://github.com/FreeRTOS/FreeRTOS-Kernel)
 
 ## Requirements
 - Windows 10/11
