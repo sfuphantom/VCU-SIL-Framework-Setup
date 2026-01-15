@@ -2,8 +2,9 @@
 
 ## **Introduction**
 
-This repository provides a hardware-less execution environment for the Team Phantom Vehicle Control Unit (VCU). By emulating the **FreeRTOS kernel** on Windows and Linux, it enables developers to execute, test, and modify the VCU firmware codebase in a virtualized environment.
-As a portable downstream target for SIL simulations, this repo lays the foundation for CI/CD automated testing of the [Formula SAE rules](https://www.fsaeonline.com/cdsweb/gen/documentresources.aspx)
+This repository provides a hardware-less execution environment for the Team Phantom Vehicle Control Unit (VCU). By emulating the FreeRTOS kernel on Windows and Linux, it enables developers to execute, test, and modify the VCU firmware codebase in a virtualized environment.
+
+The VCU SIL (Software-in-the-Loop) framework decouples software logic from the physical microcontroller, allowing for rapid debugging and the foundation of an automated CI/CD pipeline without the need for physical hardware for the [Formula SAE rules](https://www.fsaeonline.com/cdsweb/gen/documentresources.aspx)
 
 <p align="center">
   <b>Architecture of Integrated Repos</b><br>
