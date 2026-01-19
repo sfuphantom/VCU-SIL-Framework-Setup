@@ -70,6 +70,10 @@
 /* Standard includes. */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#ifndef _WIN32
+#include <unistd.h>
+#endif
 
 /* Kernel includes. */
 #include <FreeRTOS.h>
@@ -413,7 +417,11 @@ const unsigned long ulMSToSleep = 5;
 	{
 		/* Sleep to reduce CPU load, but don't sleep indefinitely in case there are
 		tasks waiting to be terminated by the idle task. */
-		Sleep( ulMSToSleep );
+#ifdef _WIN32
+                Sleep( ulMSToSleep );
+#else
+                usleep( ulMSToSleep * 1000 ); /* usleep takes microseconds */
+#endif
 	}
 }
 /*-----------------------------------------------------------*/
@@ -426,7 +434,11 @@ void *pvAllocated;
 
 	/* Sleep to reduce CPU load, but don't sleep indefinitely in case there are
 	tasks waiting to be terminated by the idle task. */
-	Sleep( ulMSToSleep );
+#ifdef _WIN32
+                Sleep( ulMSToSleep );
+#else
+                usleep( ulMSToSleep * 1000 ); /* usleep takes microseconds */
+#endif
 
 	/* Demonstrate a few utility functions that are not demonstrated by any of
 	the standard demo tasks. */
