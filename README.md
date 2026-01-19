@@ -24,11 +24,18 @@ This repository acts as a central hub that orchestrates the following components
 * **Downstream Target:** This repositroy functions as the execution target for the [Python Testing Framework](https://github.com/sfuphantom/TestingFramework). It receives millisecond-interval sensor data via IPC pipes and returns real-time state logs.
 
 ## Requirements
+
+### Windows
 - Windows 10/11
 - Visual Studio 2022 with desktop development C++ extension
 
 - <img width="925" alt="image" src="https://github.com/sfuphantom/VCU-SIL-Framework-Setup/assets/89829682/f03731b6-9ccb-4e87-97b1-6482628e7da3">
 
+### Mac/Linux
+- macOS 10.15+ or Linux (Ubuntu 20.04+, or similar)
+- GCC or Clang compiler (usually pre-installed on Mac/Linux)
+- Make utility
+- pthread library (usually included with the system)
 
 ## Setup Instructions
 
@@ -50,7 +57,8 @@ This repository acts as a central hub that orchestrates the following components
    ```
 
 ## Running the Application
-To run the application, follow these steps:
+
+### Windows (Visual Studio 2022)
 
 1. Open the project in Visual Studio 2022 with administrator priveledges
 
@@ -63,13 +71,42 @@ To run the application, follow these steps:
 
    <img width="838" alt="image" src="https://github.com/sfuphantom/VCU-SIL-Framework-Setup/assets/89829682/7696205b-4575-4ffa-8a61-be3aa790aae4">
 
+4. The application should start running if the setup is done correctly.
 
-5. The application should start running if the setup is done correctly.
+### Mac/Linux (Makefile)
+
+The project includes a Makefile that uses the FreeRTOS Posix port, allowing compilation on Mac and Linux systems.
+
+1. **Compile the project**:
+   ```bash
+   make
+   ```
+   
+   This will create the executable at `build/VCU-firmware-local`
+
+2. **Run the application**:
+   ```bash
+   make run
+   ```
+   
+   Or directly:
+   ```bash
+   ./build/VCU-firmware-local
+   ```
+
+3. **Clean build artifacts**:
+   ```bash
+   make clean
+   ```
+
+**Note:** The Makefile uses the FreeRTOS Posix port (`FreeRTOS/Source/portable/ThirdParty/GCC/Posix`) instead of the Windows MSVC-MingW port, providing the same functionality on Unix-like systems.
 
 ## Important Notes
 - This setup does not require any VCU hardware.
-- Ensure that Visual Studio 2022 is properly configured for C++ development with desktop development extension installed.
+- **Windows:** Ensure that Visual Studio 2022 is properly configured for C++ development with desktop development extension installed.
+- **Mac/Linux:** The project uses the FreeRTOS Posix port for Unix-like systems. Ensure GCC/Clang and Make are installed.
 - Initializing submodules is crucial for the proper functioning of the framework.
+- The project can be compiled on Windows (Visual Studio 2022), Mac, or Linux using the provided build systems.
 
 ## Troubleshooting
 If you encounter any issues during setup or execution, please refer to the documentation in the Team Phantom Google Drive or contact [@kevinl03](https://github.com/kevinl03)
