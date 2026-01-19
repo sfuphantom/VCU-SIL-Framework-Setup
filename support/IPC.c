@@ -1,5 +1,10 @@
 #include "IPC.h"
 #include "ansi_colors.h"
+#ifndef _WIN32
+#include <sys/stat.h>
+#include <errno.h>
+#include <string.h>
+#endif
 
 Pipe SimulationPipe;
 
@@ -19,14 +24,39 @@ Pipe connect_to_pipe(const char* pipe_path) {
     );
     if (pipe.handle == INVALID_HANDLE_VALUE) {
         printf("%sError opening pipe: %d%s\n", RED, GetLastError(), CRESET);
-        return;
+        pipe.handle = NULL; /* Mark as invalid */
+        SimulationPipe = pipe;
+        return pipe;
     }
 #else
-    pipe.fd = open(pipe_path, O_RDWR);
-    printf("connecting to pipe");
+    /* On Mac/Linux, try to create the FIFO if it doesn't exist */
+    struct stat st;
+    if (stat(pipe_path, &st) != 0) {
+        /* FIFO doesn't exist, try to create it */
+        if (mkfifo(pipe_path, 0666) != 0) {
+            printf("%sWarning: Could not create pipe '%s': %s%s\n", YEL, pipe_path, strerror(errno), CRESET);
+            printf("%sApplication will continue without pipe connection.%s\n", YEL, CRESET);
+            pipe.fd = -1; /* Mark as invalid */
+            SimulationPipe = pipe;
+            return pipe;
+        }
+    }
+    
+    /* Open FIFO in write-only, non-blocking mode */
+    /* This allows the app to continue even if no reader is connected */
+    pipe.fd = open(pipe_path, O_WRONLY | O_NONBLOCK);
     if (pipe.fd == -1) {
-        perror("Error opening pipe");
-        exit(EXIT_FAILURE);
+        if (errno == ENXIO) {
+            /* No reader connected yet - this is okay, we'll try again on write */
+            printf("%sWarning: No reader connected to pipe '%s' yet.%s\n", YEL, pipe_path, CRESET);
+            printf("%sApplication will continue. Pipe will be used when a reader connects.%s\n", YEL, CRESET);
+        } else {
+            printf("%sWarning: Could not open pipe '%s': %s%s\n", YEL, pipe_path, strerror(errno), CRESET);
+            printf("%sApplication will continue without pipe connection.%s\n", YEL, CRESET);
+        }
+        pipe.fd = -1; /* Mark as invalid for now */
+    } else {
+        printf("%sSuccessfully connected to pipe '%s'.%s\n", GRN, pipe_path, CRESET);
     }
 #endif
     SimulationPipe = pipe;
@@ -36,6 +66,7 @@ Pipe connect_to_pipe(const char* pipe_path) {
 Pipe create_pipe(const char* pipe_path)
 {
     Pipe pipe;
+#ifdef OS_Windows
     pipe.handle = CreateFile(
         pipe_path,
         GENERIC_READ | GENERIC_WRITE,
@@ -49,6 +80,13 @@ Pipe create_pipe(const char* pipe_path)
         fprintf(stderr, "Error opening pipe: %d\n", GetLastError());
         //exit(EXIT_FAILURE);
     }
+#else
+    pipe.fd = open(pipe_path, O_RDWR | O_CREAT, 0666);
+    if (pipe.fd == -1) {
+        perror("Error creating pipe");
+        //exit(EXIT_FAILURE);
+    }
+#endif
     return pipe;
 }
 
@@ -63,9 +101,14 @@ int read_from_pipe(Pipe pipe, char* buffer, int buffer_size) {
     }
     return bytes_read;
 #else
+    if (pipe.fd == -1) {
+        return -1; /* Pipe not connected */
+    }
     int bytes_read = read(pipe.fd, buffer, buffer_size);
     if (bytes_read == -1) {
-        perror("Error reading from pipe");
+        if (errno != EAGAIN && errno != EWOULDBLOCK) {
+            perror("Error reading from pipe");
+        }
         return -1;
     }
     return bytes_read;
@@ -82,9 +125,14 @@ int write_to_pipe(Pipe pipe, const char* data, int data_size) {
     }
     return bytes_written;
 #else
+    if (pipe.fd == -1) {
+        return -1; /* Pipe not connected */
+    }
     int bytes_written = write(pipe.fd, data, data_size);
     if (bytes_written == -1) {
-        perror("Error writing to pipe");
+        if (errno != EAGAIN && errno != EWOULDBLOCK) {
+            perror("Error writing to pipe");
+        }
         return -1;
     }
     return bytes_written;
@@ -96,7 +144,9 @@ void close_pipe(Pipe pipe) {
 #ifdef OS_Windows
     CloseHandle(pipe.handle);
 #else
-    close(pipe.fd);
+    if (pipe.fd != -1) {
+        close(pipe.fd);
+    }
 #endif
 }
 
