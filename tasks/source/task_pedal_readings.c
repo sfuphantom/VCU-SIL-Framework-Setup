@@ -172,6 +172,6 @@ static void SetBrakeLight(uint8_t value)
     char buffer[32];
     sprintf(buffer, "Setting brakelight: %d", value);
     Log(buffer);
-    return NULL;
+    return;
 
 }

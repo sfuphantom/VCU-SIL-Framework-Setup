@@ -18,7 +18,7 @@
 
 /* Phantom modules*/
 //#include "board_hardware.h"
-//#include "MCP48FV_DAC_SPI.h"
+#include "MCP48FV_DAC_SPI.h"
 //#include "Drivers\UART\phantom_timer.h"
 //#include "Drivers\UART\Phantom_sci.h"
 
