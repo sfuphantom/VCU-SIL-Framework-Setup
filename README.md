@@ -39,21 +39,18 @@ This repository acts as a central hub that orchestrates the following components
 
 ## Setup Instructions
 
-1. **Clone the Repository**: 
-   ```
-   git clone <repository_url>
+1. **Clone the Repository** (with submodules): 
+   ```bash
+   git clone --recurse-submodules <repository_url>
    ```
    
-2. **Navigate to the Repository Directory**:
-   ```
+   This automatically initializes and updates all submodules, including checking out the correct branch (SIL-testing for hercules-phantom-lib).
+   
+   **Alternative** (if you already cloned without the flag):
+   ```bash
+   git clone <repository_url>
    cd VCU-SIL-Framework-Setup
-   ```
-
-3. **Initialize Submodules**:
-   ```
-   git submodule init
-   git submodule update
-   git submodule sync
+   git submodule update --init --recursive
    ```
 
 ## Running the Application
