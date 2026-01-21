@@ -39,6 +39,13 @@
 /* FreeRTOS includes. */
 #include <FreeRTOS.h>
 
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <time.h>
+#include <sys/time.h>
+#endif
+
 /* Variables used in the creation of the run time stats time base.  Run time
 stats record how much time each task spends in the Running state. */
 static long long llInitialRunTimeCounterValue = 0LL, llTicksPerHundedthMillisecond = 0LL;
@@ -47,7 +54,8 @@ static long long llInitialRunTimeCounterValue = 0LL, llTicksPerHundedthMilliseco
 
 void vConfigureTimerForRunTimeStats( void )
 {
-LARGE_INTEGER liPerformanceCounterFrequency, liInitialRunTimeValue;
+#ifdef _WIN32
+	LARGE_INTEGER liPerformanceCounterFrequency, liInitialRunTimeValue;
 
 	/* Initialise the variables used to create the run time stats time base.
 	Run time stats record how much time each task spends in the Running
@@ -68,13 +76,29 @@ LARGE_INTEGER liPerformanceCounterFrequency, liInitialRunTimeValue;
 		QueryPerformanceCounter( &liInitialRunTimeValue );
 		llInitialRunTimeCounterValue = liInitialRunTimeValue.QuadPart;
 	}
+#else
+	struct timespec ts;
+	/* Use CLOCK_MONOTONIC for high-resolution timing */
+	if( clock_gettime( CLOCK_MONOTONIC, &ts ) == 0 )
+	{
+		/* Convert to nanoseconds, then to 1/100th milliseconds */
+		llInitialRunTimeCounterValue = ( ( long long ) ts.tv_sec * 1000000000LL ) + ( long long ) ts.tv_nsec;
+		llTicksPerHundedthMillisecond = 10000000LL; /* 10000000 nanoseconds = 1/100th millisecond */
+	}
+	else
+	{
+		llTicksPerHundedthMillisecond = 1;
+	}
+#endif
 }
 /*-----------------------------------------------------------*/
 
 configRUN_TIME_COUNTER_TYPE ulGetRunTimeCounterValue( void )
 {
-LARGE_INTEGER liCurrentCount;
-configRUN_TIME_COUNTER_TYPE ulReturn;
+	configRUN_TIME_COUNTER_TYPE ulReturn;
+
+#ifdef _WIN32
+	LARGE_INTEGER liCurrentCount;
 
 	/* What is the performance counter value now? */
 	QueryPerformanceCounter( &liCurrentCount );
@@ -92,6 +116,29 @@ configRUN_TIME_COUNTER_TYPE ulReturn;
 	{
 		ulReturn = ( configRUN_TIME_COUNTER_TYPE ) ( ( liCurrentCount.QuadPart - llInitialRunTimeCounterValue ) / llTicksPerHundedthMillisecond );
 	}
+#else
+	struct timespec ts;
+	long long llCurrentCount;
+
+	/* What is the current time? */
+	if( clock_gettime( CLOCK_MONOTONIC, &ts ) == 0 )
+	{
+		llCurrentCount = ( ( long long ) ts.tv_sec * 1000000000LL ) + ( long long ) ts.tv_nsec;
+
+		if( llTicksPerHundedthMillisecond == 0 )
+		{
+			ulReturn = 0;
+		}
+		else
+		{
+			ulReturn = ( configRUN_TIME_COUNTER_TYPE ) ( ( llCurrentCount - llInitialRunTimeCounterValue ) / llTicksPerHundedthMillisecond );
+		}
+	}
+	else
+	{
+		ulReturn = 0;
+	}
+#endif
 
 	return ulReturn;
 }

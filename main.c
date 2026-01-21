@@ -50,11 +50,30 @@
 /* Standard includes. */
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef _WIN32
 #include <conio.h>
-
 /* Visual studio intrinsics used so the __debugbreak() function is available
  * should an assert get hit. */
 #include <intrin.h>
+#else
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <signal.h>
+/* Cross-platform replacements for Windows functions */
+#define __debugbreak() raise(SIGTRAP)
+static int _getch(void) {
+    struct termios old_term, new_term;
+    int ch;
+    tcgetattr(STDIN_FILENO, &old_term);
+    new_term = old_term;
+    new_term.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &old_term);
+    return ch;
+}
+#endif
 
 /* FreeRTOS kernel includes. */
 #include "FreeRTOS.h"
@@ -139,11 +158,15 @@ void vApplicationGetTimerTaskMemory( StaticTask_t ** ppxTimerTaskTCBBuffer,
 static void prvSaveTraceFile( void );
 
 /*
- * Windows thread function to capture keyboard input from outside of the
+ * Thread function to capture keyboard input from outside of the
  * FreeRTOS simulator. This thread passes data safely into the FreeRTOS
  * simulator using a stream buffer.
  */
+#ifdef _WIN32
 static DWORD WINAPI prvWindowsKeyboardInputThread( void * pvParam );
+#else
+static void * prvPosixKeyboardInputThread( void * pvParam );
+#endif
 
 /*
  * Interrupt handler for when keyboard input is received.
@@ -155,6 +178,11 @@ static uint32_t prvKeyboardInterruptHandler( void );
  */
 extern void vBlinkyKeyboardInterruptHandler( int xKeyPressed );
 
+/*
+ * Main function for the phantom demo.
+ */
+extern void main_phantom( void );
+
 /*-----------------------------------------------------------*/
 
 /* When configSUPPORT_STATIC_ALLOCATION is set to 1 the application writer can
@@ -165,8 +193,13 @@ extern void vBlinkyKeyboardInterruptHandler( int xKeyPressed );
 StackType_t uxTimerTaskStack[ configTIMER_TASK_STACK_DEPTH ];
 
 
-/* Thread handle for the keyboard input Windows thread. */
+/* Thread handle for the keyboard input thread. */
+#ifdef _WIN32
 static HANDLE xWindowsKeyboardInputThreadHandle = NULL;
+#else
+#include <pthread.h>
+static pthread_t xKeyboardInputThreadHandle = 0;
+#endif
 
 /* This stores the last key pressed that has not been handled.
  * Keyboard input is retrieved by the prvWindowsKeyboardInputThread
@@ -201,9 +234,16 @@ int main( void )
     configASSERT( xTraceEnable(TRC_START) == TRC_SUCCESS );
     
     /* Set interrupt handler for keyboard input. */
+#ifdef _WIN32
     vPortSetInterruptHandler( mainINTERRUPT_NUMBER_KEYBOARD, prvKeyboardInterruptHandler );
+#else
+    /* Posix port doesn't use interrupt handlers in the same way */
+    (void)mainINTERRUPT_NUMBER_KEYBOARD;
+    (void)prvKeyboardInterruptHandler;
+#endif
 
     /* Start keyboard input handling thread. */
+#ifdef _WIN32
     xWindowsKeyboardInputThreadHandle = CreateThread(
         NULL,                          /* Pointer to thread security attributes. */
         0,                             /* Initial thread stack size, in bytes. */
@@ -211,9 +251,14 @@ int main( void )
         NULL,                          /* Argument for new thread. */
         0,                             /* Creation flags. */
         NULL);
+#else
+    pthread_create(&xKeyboardInputThreadHandle, NULL, prvPosixKeyboardInputThread, NULL);
+#endif
 
-    /* Use the cores that are not used by the FreeRTOS tasks for the Windows thread. */
+    /* Use the cores that are not used by the FreeRTOS tasks for the thread. */
+#ifdef _WIN32
     SetThreadAffinityMask( xWindowsKeyboardInputThreadHandle, ~0x01u );
+#endif
 
     /* The mainCREATE_SIMPLE_BLINKY_DEMO_ONLY setting is described at the top
      * of this file. */
@@ -327,7 +372,11 @@ void vAssertCalled( unsigned long ulLine,
 
     taskENTER_CRITICAL();
     {
+#ifdef _WIN32
         printf("ASSERT! Line %ld, file %s, GetLastError() %ld\r\n", ulLine, pcFileName, GetLastError());
+#else
+        printf("ASSERT! Line %ld, file %s\r\n", ulLine, pcFileName);
+#endif
 
         /* Stop the trace recording and save the trace. */
         ( void ) xTraceDisable();
@@ -341,12 +390,17 @@ void vAssertCalled( unsigned long ulLine,
          * value. */
         while( ulSetToNonZeroInDebuggerToContinue == 0 )
         {
+#ifdef _WIN32
             __asm {
                 NOP
             };
             __asm {
                 NOP
             };
+#else
+            __asm__ __volatile__("nop");
+            __asm__ __volatile__("nop");
+#endif
         }
 
         /* Re-enable the trace recording. */
@@ -360,7 +414,11 @@ static void prvSaveTraceFile( void )
 {
     FILE * pxOutputFile;
 
+#ifdef _WIN32
     fopen_s( &pxOutputFile, mainTRACE_FILE_NAME, "wb" );
+#else
+    pxOutputFile = fopen( mainTRACE_FILE_NAME, "wb" );
+#endif
 
     if( pxOutputFile != NULL )
     {
@@ -504,7 +562,11 @@ static uint32_t prvKeyboardInterruptHandler(void)
  * FreeRTOS simulator. This thread passes data into the simulator using
  * an integer.
  */
+#ifdef _WIN32
 static DWORD WINAPI prvWindowsKeyboardInputThread( void * pvParam )
+#else
+static void * prvPosixKeyboardInputThread( void * pvParam )
+#endif
 {
     ( void ) pvParam;
 
@@ -516,11 +578,20 @@ static DWORD WINAPI prvWindowsKeyboardInputThread( void * pvParam )
         /* Notify FreeRTOS simulator that there is a keyboard interrupt.
          * This will trigger prvKeyboardInterruptHandler.
          */
+#ifdef _WIN32
         vPortGenerateSimulatedInterrupt( mainINTERRUPT_NUMBER_KEYBOARD );
+#else
+        /* Posix port: directly call the interrupt handler */
+        prvKeyboardInterruptHandler();
+#endif
     }
 
     /* Should not get here so return negative exit status. */
+#ifdef _WIN32
     return -1;
+#else
+    return NULL;
+#endif
 }
 
 /*-----------------------------------------------------------*/

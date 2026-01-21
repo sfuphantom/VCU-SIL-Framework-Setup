@@ -83,7 +83,25 @@
 
 /* Standard includes. */
 #include <stdio.h>
+#ifdef _WIN32
 #include <conio.h>
+#else
+#include <termios.h>
+#include <unistd.h>
+#include <fcntl.h>
+/* Cross-platform replacement for _getch() */
+static int _getch(void) {
+    struct termios old_term, new_term;
+    int ch;
+    tcgetattr(STDIN_FILENO, &old_term);
+    new_term = old_term;
+    new_term.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &old_term);
+    return ch;
+}
+#endif
 
 /* Kernel includes. */
 #include "FreeRTOS.h"
@@ -92,6 +110,8 @@
 #include "semphr.h"
 
 #include "task_throttle.h"
+#include "Phantom_sci.h"
+#include "vcu_data.h"
 #include "task_pedal_readings.h"
 #include "task_event_handler.h"
 #include "task_logger.h"
