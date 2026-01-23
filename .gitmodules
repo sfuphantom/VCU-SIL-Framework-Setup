@@ -1,3 +1,8 @@
 [submodule "hercules-phantom-lib"]
 	path = hercules-phantom-lib
 	url = https://github.com/sfuphantom/hercules-phantom-lib.git
+	branch = SIL-testing
+[submodule "vcu-fw"]
+	path = vcu-fw
+	url = https://github.com/sfuphantom/vcu-fw.git
+	branch = develop
